@@ -1,0 +1,15 @@
+# Nix
+result
+result-*
+
+# Direnv
+.direnv
+
+# Local / machine-specific
+.DS_Store
+*.swp
+defaults.txt
+Brewfile
+
+# Third-party reference tree (nested template; contains sops secrets layout)
+example-config/

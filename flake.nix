@@ -1,5 +1,5 @@
 {
-  description = "stupid-sexy-flake — nix-darwin system config";
+  description = "stupid-sexy-flake — nix-darwin + NixOS (Mac + hub)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -25,15 +25,35 @@
       nix-homebrew,
       ...
     }:
+    let
+      sharedModules = [ ./modules/shared ];
+      # NixOS hub: set true when installing on QEMU/KVM (VirtIO initrd modules).
+      hubQemuGuest = false;
+    in
     {
-      darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
+      darwinConfigurations.hexley = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         specialArgs = { inherit self inputs; };
         modules = [
           mac-app-util.darwinModules.default
           nix-homebrew.darwinModules.nix-homebrew
           home-manager.darwinModules.home-manager
+        ]
+        ++ sharedModules
+        ++ [
           ./modules/darwin
+          ./machines/mac
+        ];
+      };
+
+      nixosConfigurations.tux = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit self inputs hubQemuGuest;
+        };
+        modules = sharedModules ++ [
+          ./modules/nixos
+          ./machines/hub
         ];
       };
     };

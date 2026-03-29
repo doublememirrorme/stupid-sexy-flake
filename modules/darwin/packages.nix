@@ -2,33 +2,12 @@
 {
   environment.systemPackages = [
     pkgs.mkalias
-    pkgs.vim
-    pkgs.tmux
-    pkgs.zsh
-    pkgs.tldr
-    pkgs.docker
-    pkgs.jq
-    pkgs.nicotine-plus
     pkgs.awscli2
-    pkgs.openssl_3
-    pkgs.ncdu
-    pkgs.htop
-    pkgs.yt-dlp
     pkgs.monitorcontrol
     pkgs.iterm2
-    pkgs.beets
-    pkgs.fira-code
     pkgs.postman
-    pkgs.qbittorrent
-    pkgs.radarr
-    pkgs.sonarr
-    pkgs.prowlarr
     pkgs.mas
-    pkgs.flac
+    pkgs.fira-code
     pkgs.maccy
-    pkgs.nodejs_24
-    pkgs.pnpm
-    pkgs.yarn
-    pkgs.gh
   ];
 }

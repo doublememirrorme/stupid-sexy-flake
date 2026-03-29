@@ -2,6 +2,6 @@
 {
   services.skhd = {
     enable = true;
-    skhdConfig = builtins.readFile ./skhdrc;
+    skhdConfig = builtins.readFile ./.skhdrc;
   };
 }

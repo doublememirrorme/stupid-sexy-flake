@@ -56,8 +56,6 @@ _: {
       "com.apple.TextEdit".RichText = 0;
       "com.apple.terminal".SecureKeyboardEntry = true;
 
-      "com.googlecode.iterm2".PromptOnQuit = false;
-
       "-g" = {
         AppleAccentColor = 2;
         AppleHighlightColor = "1.000000 0.937255 0.690196 Yellow";

@@ -1,6 +1,5 @@
 { pkgs, inputs, ... }:
 {
-  # Spotlight / Launchpad for HM-installed .app bundles (e.g. Cursor via programs.vscode)
   home-manager.sharedModules = [
     inputs.mac-app-util.homeManagerModules.default
   ];
@@ -15,7 +14,10 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.hcanadjija = { pkgs, ... }: {
-    imports = [ ./home/zsh.nix ];
+    imports = [
+      ./home/zsh.nix
+      ./home/iterm2.nix
+    ];
 
     home.stateVersion = "25.05";
 

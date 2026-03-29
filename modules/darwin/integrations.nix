@@ -22,6 +22,7 @@
     programs.vscode = {
       enable = true;
       package = pkgs.code-cursor;
+      mutableExtensionsDir = false;
       profiles.default.extensions = with pkgs.vscode-extensions; [
         dbaeumer.vscode-eslint
         eamodio.gitlens

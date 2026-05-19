@@ -13,27 +13,14 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "backup";
   home-manager.users.hcanadjija = { pkgs, ... }: {
     imports = [
       ./home/zsh.nix
       ./home/iterm2.nix
+      ./home/cursor.nix
     ];
 
     home.stateVersion = "25.05";
-
-    programs.vscode = {
-      enable = true;
-      package = pkgs.code-cursor;
-      mutableExtensionsDir = false;
-      profiles.default.extensions = with pkgs.vscode-extensions; [
-        dbaeumer.vscode-eslint
-        eamodio.gitlens
-        ms-azuretools.vscode-docker
-        ms-vscode-remote.remote-containers
-        vscodevim.vim
-        jnoortheen.nix-ide
-        github.vscode-pull-request-github
-      ];
-    };
   };
 }

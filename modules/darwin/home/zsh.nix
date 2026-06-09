@@ -15,6 +15,11 @@
       extended = true;
     };
 
+    shellAliases = {
+      ry = "restart-yabai";
+      rs = "restart-skhd";
+    };
+
     sessionVariables = {
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
       DOCKER_CONFIG = "${config.home.homeDirectory}/.config/docker";

@@ -5,6 +5,11 @@
     brews = [
       "nvm"
       "bandcamp-dl"
+      "ffmpeg"
+      "navidrome"
+    ];
+    taps = [
+      "kgarner7/feishin"
     ];
     casks = [
       "firefox"
@@ -16,6 +21,7 @@
       "openemu"
       "emby"
       "embyserver"
+      "feishin"
       "steam"
       "roon"
     ];

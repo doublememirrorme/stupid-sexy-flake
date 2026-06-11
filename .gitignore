@@ -6,6 +6,8 @@ result-*
 .direnv
 
 # Local / machine-specific
+secrets/*.env
+!secrets/*.env.example
 .DS_Store
 *.swp
 defaults.txt

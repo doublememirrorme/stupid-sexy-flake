@@ -6,6 +6,7 @@ let
   dataDir = "${home}/Library/Application Support/nix/navidrome";
   settingsFormat = pkgs.formats.json { };
   brewBin = "${config.homebrew.prefix}/bin";
+  secretsFile = "${home}/.config/nix-darwin/secrets/navidrome.env";
   navidromeConfig = settingsFormat.generate "navidrome.json" {
     MusicFolder = musicFolder;
     DataFolder = dataDir;
@@ -18,12 +19,13 @@ in
 {
   launchd.user.agents.navidrome = {
     path = [ brewBin ];
+    script = ''
+      set -a
+      . "${secretsFile}"
+      set +a
+      exec "${config.homebrew.prefix}/bin/navidrome" --configfile "${navidromeConfig}"
+    '';
     serviceConfig = {
-      ProgramArguments = [
-        "${config.homebrew.prefix}/bin/navidrome"
-        "--configfile"
-        "${navidromeConfig}"
-      ];
       KeepAlive = true;
       RunAtLoad = true;
       WorkingDirectory = dataDir;
@@ -33,5 +35,9 @@ in
   system.activationScripts.postActivation.text = lib.mkAfter ''
     mkdir -p "${dataDir}"
     chown ${user}:staff "${dataDir}"
+
+    if [ ! -f "${secretsFile}" ]; then
+      echo "warning: ${secretsFile} not found; copy secrets/navidrome.env.example and add your Last.fm keys" >&2
+    fi
   '';
 }

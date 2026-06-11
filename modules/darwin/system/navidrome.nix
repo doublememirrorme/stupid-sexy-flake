@@ -12,6 +12,10 @@ let
     url = "https://github.com/navidrome/apple-music-plugin/releases/download/v0.2.0/apple-music.ndp";
     hash = "sha256-NoJ1HnLKpcxGs/ercN5w6gJvCjikf3gLLStJIu0K0VQ=";
   };
+  audioMusePlugin = pkgs.fetchurl {
+    url = "https://github.com/NeptuneHub/AudioMuse-AI-NV-plugin/releases/download/v8/audiomuseai.ndp";
+    hash = "sha256-hOanUJBKgsW+p2gZgHEhN64lS0oUlsu8mXTaseSzndg=";
+  };
   navidromeConfig = settingsFormat.generate "navidrome.json" {
     MusicFolder = musicFolder;
     DataFolder = dataDir;
@@ -19,7 +23,7 @@ let
     Port = 4533;
     EnableInsightsCollector = false;
     FFmpegPath = "${brewBin}/ffmpeg";
-    Agents = "apple-music,lastfm";
+    Agents = "audiomuseai,apple-music,lastfm";
     Plugins = {
       Enabled = true;
       Folder = pluginsDir;
@@ -45,6 +49,7 @@ in
   system.activationScripts.postActivation.text = lib.mkAfter ''
     mkdir -p "${pluginsDir}"
     install -m 644 ${appleMusicPlugin} "${pluginsDir}/apple-music.ndp"
+    install -m 644 ${audioMusePlugin} "${pluginsDir}/audiomuseai.ndp"
     chown -R ${user}:staff "${dataDir}"
 
     if [ ! -f "${secretsFile}" ]; then

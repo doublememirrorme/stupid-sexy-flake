@@ -56,17 +56,22 @@ in
       paths = {
         default = ''Albums/$albumartist/$album%aunique{}/$track - $title'';
         comp = ''Compilations/$album%aunique{}/$track - $artist - $title'';
-        singleton = ''Singles/$artist - $title'';
+        singleton = ''Singles/$artist/$track - $title'';
         "albumtype:mix" = ''Mixes/$album%aunique{}/$track - $title'';
       };
 
       plugins = [
+        "chroma"
         "discogs"
+        "musicbrainz"
         "autobpm"
         "fetchart"
         "embedart"
+        "keyfinder"
         "lastgenre"
+        "mbsync"
         "info"
+        "zero"
       ];
 
       discogs = {
@@ -75,14 +80,24 @@ in
         append_style_genre = true;
       };
 
+      musicbrainz = {
+        data_source_mismatch_penalty = 0.5;
+      };
+
       keyfinder = {
-        bin = "keyfinder-cli";
+        auto = false;
+        bin = "${pkgs.keyfinder-cli}/bin/keyfinder-cli";
       };
 
       lastgenre = {
-        count = 5;
+        auto = true;
+        count = 3;
         force = false;
         keep_existing = true;
+        canonical = true;
+        prefer_specific = true;
+        min_weight = 15;
+        source = "album";
       };
 
       fetchart = {
@@ -99,10 +114,45 @@ in
       };
 
       chroma = {
-        auto = true;
+        auto = false;
+      };
+
+      autobpm = {
+        auto = false;
+      };
+
+      zero = {
+        fields = [
+          "comments"
+          "artist_sort"
+          "artists"
+          "artists_sort"
+          "artists_credit"
+          "albumartist_sort"
+          "albumartists"
+          "albumartists_sort"
+          "albumartists_credit"
+          "album_artist"
+          "album_artists"
+          "album_artists_credit"
+          "artist_credit"
+          "Album Artist Credit"
+          "ARTISTS"
+          "ARTISTS_SORT"
+          "ARTISTS_CREDIT"
+          "TOPE"
+          "publisher"
+          "comment"
+        ];
+        update_database = false;
       };
     };
   };
+
+  home.packages = [
+    pkgs.chromaprint
+    pkgs.keyfinder-cli
+  ];
 
   home.activation.writeBeetsSecrets = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${writeBeetsSecrets}

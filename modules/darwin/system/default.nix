@@ -2,6 +2,7 @@
 {
   imports = [
     ./core.nix
+    ./fonts.nix
     ./postgresql.nix
     ./redis.nix
     ./navidrome.nix

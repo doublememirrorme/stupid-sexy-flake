@@ -72,6 +72,7 @@ in
         "mbsync"
         "info"
         "zero"
+        "web"
       ];
 
       discogs = {
@@ -145,6 +146,12 @@ in
           "comment"
         ];
         update_database = false;
+      };
+
+      web = {
+        host = "127.0.0.1";
+        port = 8337;
+        readonly = true;
       };
     };
   };

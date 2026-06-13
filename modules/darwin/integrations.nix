@@ -20,6 +20,7 @@
       ./home/tmux.nix
       ./home/iterm2.nix
       ./home/cursor.nix
+      ./home/beets.nix
     ];
 
     home.stateVersion = "25.05";

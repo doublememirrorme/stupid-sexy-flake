@@ -17,7 +17,6 @@
     pkgs.yarn
     pkgs.nicotine-plus
     pkgs.yt-dlp
-    pkgs.beets
     pkgs.flac
   ];
 }

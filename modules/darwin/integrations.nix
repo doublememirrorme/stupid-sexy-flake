@@ -17,6 +17,7 @@
   home-manager.users.hcanadjija = { pkgs, ... }: {
     imports = [
       ./home/zsh.nix
+      ./home/nushell.nix
       ./home/tmux.nix
       ./home/iterm2.nix
       ./home/cursor.nix

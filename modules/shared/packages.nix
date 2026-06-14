@@ -4,6 +4,7 @@
     pkgs.vim
     pkgs.tmux
     pkgs.zsh
+    pkgs.nushell
     pkgs.tldr
     pkgs.docker
     pkgs.jq

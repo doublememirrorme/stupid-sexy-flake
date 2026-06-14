@@ -42,7 +42,7 @@ let
 
     ''
     + lib.concatMapStringsSep "\n" (label: ''
-      pkill -x "''${label##*.}" 2>/dev/null || true
+      pkill -x "${lib.removePrefix "org.nixos." label}" 2>/dev/null || true
     '') services.labels
     + ''
 

@@ -6,6 +6,7 @@
       "nvm"
       "bandcamp-dl"
       "ffmpeg"
+      "mpv"
       "navidrome"
     ];
     taps = [
@@ -23,7 +24,6 @@
       "embyserver"
       "feishin"
       "steam"
-      "roon"
     ];
     masApps = {
       "AdGuard for Safari" = 1440147259;

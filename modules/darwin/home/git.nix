@@ -7,7 +7,7 @@
     # Personal is the default; anything under ~/Projects/bb-agency uses work.
     settings.user = {
       name = "bb-hcanadjija";
-      email = "bb-hcanadjija@users.noreply.github.com";
+      email = "hrvoje.canadjija@gmail.com";
     };
 
     includes = [

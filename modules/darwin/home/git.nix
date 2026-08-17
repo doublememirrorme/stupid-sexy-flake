@@ -5,8 +5,10 @@
 
     # There was no global config at all before this, only per-repo identities.
     # Personal is the default; anything under ~/Projects/bb-agency uses work.
-    userName = "bb-hcanadjija";
-    userEmail = "bb-hcanadjija@users.noreply.github.com";
+    settings.user = {
+      name = "bb-hcanadjija";
+      email = "bb-hcanadjija@users.noreply.github.com";
+    };
 
     includes = [
       {

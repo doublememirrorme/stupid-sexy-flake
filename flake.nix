@@ -15,8 +15,10 @@
       url = "github:zhaofengli/nix-homebrew";
       inputs.brew-src.follows = "brew-src";
     };
+    # Tracks brew master so cask definitions and the brew that reads them stay in sync.
+    # Moves on nix flake update, not on every rebuild.
     brew-src = {
-      url = "github:Homebrew/brew/5.1.14";
+      url = "github:Homebrew/brew";
       flake = false;
     };
     mac-app-util.url = "github:hraban/mac-app-util";

@@ -33,6 +33,9 @@
       "AdGuard for Safari" = 1440147259;
       "Animoog Z" = 1586841361;
       "Spark" = 1176895641;
+      "Keynote" = 361285480;
+      "Numbers" = 361304891;
+      "Pages" = 361309726;
     };
     onActivation.cleanup = "zap";
 

@@ -9,9 +9,8 @@
       "mpv"
       "navidrome"
     ];
-    taps = [
-      "kgarner7/feishin"
-    ];
+    # kgarner7/feishin is declared in extraConfig instead, so it can carry `trusted:`.
+    taps = [ ];
     casks = [
       "firefox"
       "google-chrome"
@@ -36,5 +35,12 @@
       "Spark" = 1176895641;
     };
     onActivation.cleanup = "zap";
+
+    # Recent brew refuses to load casks from third-party taps until they are trusted.
+    # nix-darwin's `taps` option cannot emit the `trusted:` key, so declare the tap here.
+    # Scoped to the feishin cask rather than trusting everything in the tap.
+    extraConfig = ''
+      tap "kgarner7/feishin", trusted: { casks: ["feishin"] }
+    '';
   };
 }

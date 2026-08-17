@@ -15,10 +15,18 @@
       extended = true;
     };
 
-    shellAliases = {
-      ry = "restart-yabai";
-      rs = "restart-skhd";
-    };
+    shellAliases =
+      let
+        veyalis = "${config.home.homeDirectory}/Projects/bb-agency/veyalis";
+      in
+      {
+        ry = "restart-yabai";
+        rs = "restart-skhd";
+
+        veyalis-hrm = "cd ${veyalis}/web-hrm";
+        veyalis-candidate-portal = "cd ${veyalis}/web-candidate-portal";
+        veyalis-core = "cd ${veyalis}/web-core";
+      };
 
     sessionVariables = {
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";

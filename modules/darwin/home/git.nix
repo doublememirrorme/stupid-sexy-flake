@@ -6,7 +6,7 @@
     # There was no global config at all before this, only per-repo identities.
     # Personal is the default; anything under ~/Projects/bb-agency uses work.
     settings.user = {
-      name = "bb-hcanadjija";
+      name = "doublememirrorme";
       email = "hrvoje.canadjija@gmail.com";
     };
 

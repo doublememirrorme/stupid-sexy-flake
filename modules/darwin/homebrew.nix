@@ -8,6 +8,9 @@
       "ffmpeg"
       "mpv"
       "navidrome"
+      # Would rather come from nixpkgs, but pkgs.mise fails to build on darwin
+      # right now (its direnv dependency needs cgo). See home/mise.nix.
+      "mise"
     ];
     # kgarner7/feishin is declared in extraConfig instead, so it can carry `trusted:`.
     taps = [ ];

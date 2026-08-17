@@ -16,12 +16,17 @@
   home-manager.backupFileExtension = "backup";
   home-manager.users.hcanadjija = { pkgs, ... }: {
     imports = [
+      ./home/xdg-dirs.nix
       ./home/zsh.nix
       ./home/nushell.nix
       ./home/tmux.nix
       ./home/iterm2.nix
       ./home/cursor.nix
       ./home/beets.nix
+      ./home/git.nix
+      ./home/gh.nix
+      ./home/htop.nix
+      ./home/mise.nix
     ];
 
     home.stateVersion = "25.05";

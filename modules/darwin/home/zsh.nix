@@ -35,6 +35,13 @@
       NVM_DIR = "${config.xdg.configHome}/nvm";
     };
 
+    # Secrets live in $ZDOTDIR/.zshenv.private, which is gitignored and never
+    # entered into nix. Nothing sourced it before, so HOMEBREW_GITHUB_API_TOKEN
+    # and anything else in there was silently unset.
+    envExtra = ''
+      [[ -r "$ZDOTDIR/.zshenv.private" ]] && source "$ZDOTDIR/.zshenv.private"
+    '';
+
     # Empty theme: Oh My Zsh must not set a theme so Pure can own the prompt (see Pure readme).
     "oh-my-zsh" = {
       enable = true;

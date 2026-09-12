@@ -17,6 +17,7 @@
     casks = [
       "firefox"
       "google-chrome"
+      "visual-studio-code"
       "zen"
       "docker-desktop"
       "figma"

@@ -22,6 +22,7 @@
       ./home/tmux.nix
       ./home/iterm2.nix
       ./home/cursor.nix
+      ./home/vscode.nix
       ./home/beets.nix
       ./home/git.nix
       ./home/gh.nix

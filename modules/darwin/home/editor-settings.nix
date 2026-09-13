@@ -1,7 +1,29 @@
 # Shared by cursor.nix (via programs.cursor) and vscode.nix (via programs.vscode).
 # Per-editor overrides live in those two files, not here.
-pkgs: {
-  extensions = with pkgs.vscode-extensions; [
+pkgs:
+let
+  # Neither of these is in nixpkgs, so they come straight from the marketplace.
+  tinaciousDesign = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      publisher = "tinaciousdesign";
+      name = "theme-tinaciousdesign";
+      version = "2.4.0";
+      hash = "sha256-wrliL9OLz8oNyGzR7xh9dtiWkNWX0/N6PTjHVt8Whew=";
+    };
+  };
+
+  # Provides the city-lights-icons-vsc-light icon theme set below.
+  cityLightsIcons = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      publisher = "Yummygum";
+      name = "city-lights-icon-vsc";
+      version = "1.1.3";
+      hash = "sha256-TLbBJ9pjHuQE+1fQZ4nyg8Q9YpDXVCd+EbMdatF9ofE=";
+    };
+  };
+in
+{
+  extensions = (with pkgs.vscode-extensions; [
     dbaeumer.vscode-eslint
     eamodio.gitlens
     ms-azuretools.vscode-docker
@@ -11,6 +33,9 @@ pkgs: {
     github.vscode-pull-request-github
     # Several defaultFormatter settings below already point at prettier.
     esbenp.prettier-vscode
+  ]) ++ [
+    tinaciousDesign
+    cityLightsIcons
   ];
 
   userSettings = {
@@ -57,9 +82,10 @@ pkgs: {
       markdown = true;
     };
     "githubPullRequests.pullBranch" = "never";
-    "workbench.preferredLightColorTheme" = "Quiet Light";
-    "workbench.preferredDarkColorTheme" = "Cursor Dark Midnight";
-    "workbench.colorTheme" = "Quiet Light";
+    "workbench.preferredLightColorTheme" = "Tinacious Design (Light)";
+    "workbench.preferredDarkColorTheme" = "Tinacious Design";
+    # Only used if window.autoDetectColorScheme is ever turned off.
+    "workbench.colorTheme" = "Tinacious Design";
     "window.systemColorTheme" = "auto";
     "window.autoDetectColorScheme" = true;
   };

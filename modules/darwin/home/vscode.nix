@@ -20,8 +20,6 @@ in
       extensions = shared.extensions ++ [ pkgs.vscode-extensions.anthropic.claude-code ];
 
       userSettings = shared.userSettings // {
-        # "Cursor Dark Midnight" is a Cursor built-in; VS Code would silently fall back.
-        "workbench.preferredDarkColorTheme" = "Default Dark Modern";
         "workbench.startupEditor" = "none";
       };
     };

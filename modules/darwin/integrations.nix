@@ -19,6 +19,7 @@
       ./home/xdg-dirs.nix
       ./home/zsh.nix
       ./home/nushell.nix
+      ./home/appearance.nix
       ./home/tmux.nix
       ./home/iterm2.nix
       ./home/cursor.nix
@@ -28,6 +29,7 @@
       ./home/gh.nix
       ./home/htop.nix
       ./home/mise.nix
+      ./home/claude.nix
     ];
 
     home.stateVersion = "25.05";

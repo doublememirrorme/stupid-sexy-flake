@@ -31,6 +31,7 @@
       ./home/mise.nix
       ./home/claude.nix
       ./home/yazi.nix
+      ./home/lazygit.nix
     ];
 
     home.stateVersion = "25.05";

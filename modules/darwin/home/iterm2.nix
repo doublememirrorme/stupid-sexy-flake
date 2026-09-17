@@ -61,6 +61,10 @@ let
     "Use Tab Color (Light)" = true;
     "Use Tab Color (Dark)" = true;
     "Use Cursor Guide" = false;
+    # iTerm2 draws a blue triangle in the margin for every mark (normally set
+    # by shell prompts). They stay pinned to screen rows while tmux redraws
+    # the text under them, so they end up next to unrelated lines.
+    "Show Mark Indicators" = false;
   }
   // colourSet palette.light "(Light)"
   // colourSet palette.dark "(Dark)";
@@ -71,6 +75,11 @@ in
     CopySelection = true;
     AddNewTabAtEndOfTabs = true;
     TabStyleWithAutomaticOption = 5;
+    # Top and bottom terminal margin in points, default 2. The top one showed
+    # as a light line between the pink title bar and tmux's pink status bar.
+    # Global for all profiles. New windows use it right away; open windows keep
+    # their layout until they are resized or iTerm2 is relaunched.
+    TerminalVMargin = 0;
     # iTerm2 reads this once at launch, so quit and reopen it after a switch.
     "Default Bookmark Guid" = "tinacious-design";
 

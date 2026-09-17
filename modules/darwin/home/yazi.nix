@@ -3,6 +3,21 @@ let
   palette = import ./tinacious-palette.nix;
   tomlFormat = pkgs.formats.toml { };
 
+  # Tinacious Light's accents are faint as text on its #f8f8ff background
+  # (1.8 to 2.9:1), and yazi draws most of its text in them. The light flavor
+  # uses darker shades of the same hues that reach about 5:1. The dark flavor,
+  # iTerm2 and tmux keep the palette as it is. Pink stays palette.pink wherever
+  # it is a badge background with white text.
+  lightText = palette.light // {
+    blue = "#006ca6";    # was #01a9e1
+    yellow = "#9a5c00";  # was #FFAA00
+    green = "#00803c";   # was #00b253
+    cyan = "#007a7c";    # was palette.cyan #00CED1
+    purple = "#9b3fd1";  # was palette.purple #CC66FF
+    pink = palette.pinkDeep; # was palette.pink #ff3399, for text only
+  };
+  darkText = palette.dark // { inherit (palette) cyan purple pink; };
+
   # One flavor per Tinacious variant. yazi asks the terminal whether it is
   # light or dark (CSI ?996n, OSC 11) and re-picks on every change report
   # (mode 2031), which iTerm2 sends when its light/dark colours flip. So the
@@ -18,18 +33,19 @@ let
       onPinkDeep = { fg = palette.white; bg = palette.pinkDeep; };
       subtle = { fg = variant.foreground; bg = variant.selection; };
       border = { fg = variant.border; };
-      title = { fg = palette.pink; bold = true; };
+      title = { fg = variant.pink; bold = true; };
     in
     {
       mgr = {
-        cwd = { fg = palette.pink; bold = true; };
-        find_keyword = { fg = variant.yellow; bold = true; italic = true; underline = true; };
-        find_position = { fg = palette.purple; bg = "reset"; bold = true; italic = true; };
-        symlink_target = { fg = palette.cyan; italic = true; };
+        cwd = { fg = variant.pink; bold = true; };
+        find_keyword = { fg = variant.yellow; bg = "reset"; bold = true; italic = true; underline = true; };
+        find_position = { fg = variant.purple; bg = "reset"; bold = true; italic = true; };
+        # No fg: takes the row's colour, so it stays readable on the pink hovered row.
+        symlink_target = { italic = true; };
 
         marker_copied = { fg = variant.green; bg = variant.green; };
         marker_cut = { fg = palette.pink; bg = palette.pink; };
-        marker_marked = { fg = palette.cyan; bg = palette.cyan; };
+        marker_marked = { fg = variant.cyan; bg = variant.cyan; };
         marker_selected = { fg = variant.yellow; bg = variant.yellow; };
 
         count_copied = { fg = variant.background; bg = variant.green; };
@@ -44,14 +60,16 @@ let
         inactive = subtle;
       };
 
-      # Same trio as the tmux bar: pink, deep pink and purple.
+      # Main badges match the tmux bar: pink, purple and deep pink. Alt
+      # badges (size, percent) are plain text, too small an area to carry
+      # those accents at readable contrast.
       mode = {
         normal_main = onPink // { bold = true; };
-        normal_alt = { fg = palette.pink; bg = variant.selection; };
+        normal_alt = { fg = variant.foreground; bg = variant.selection; };
         select_main = onPurple // { bold = true; };
-        select_alt = { fg = palette.purple; bg = variant.selection; };
+        select_alt = { fg = variant.foreground; bg = variant.selection; };
         unset_main = onPinkDeep // { bold = true; };
-        unset_alt = { fg = palette.pinkDeep; bg = variant.selection; };
+        unset_alt = { fg = variant.foreground; bg = variant.selection; };
       };
 
       indicator = {
@@ -64,18 +82,18 @@ let
         perm_sep = border;
         perm_type = { fg = variant.green; };
         perm_read = { fg = variant.yellow; };
-        perm_write = { fg = palette.pink; };
-        perm_exec = { fg = palette.cyan; };
+        perm_write = { fg = variant.pink; };
+        perm_exec = { fg = variant.cyan; };
         progress_label = { bold = true; };
         progress_normal = { fg = variant.green; bg = variant.selection; };
-        progress_error = { fg = variant.yellow; bg = palette.pinkDeep; };
+        progress_error = onPinkDeep;
       };
 
       which = {
         inherit border;
-        cand = { fg = palette.cyan; };
+        cand = { fg = variant.cyan; };
         rest = { fg = variant.foreground; dim = true; };
-        desc = { fg = palette.purple; };
+        desc = { fg = variant.purple; };
         separator_style = border;
       };
 
@@ -87,19 +105,19 @@ let
 
       spot = {
         inherit border title;
-        tbl_col = { fg = palette.pink; };
+        tbl_col = { fg = variant.pink; };
         tbl_cell = { fg = variant.yellow; reversed = true; };
       };
 
       notify = {
         title_info = { fg = variant.green; };
         title_warn = { fg = variant.yellow; };
-        title_error = { fg = palette.pink; };
+        title_error = { fg = variant.pink; };
       };
 
       pick = {
         inherit border;
-        active = { fg = palette.pink; bold = true; };
+        active = { fg = variant.pink; bold = true; };
       };
 
       input = {
@@ -119,21 +137,21 @@ let
 
       help = {
         inherit border;
-        chord = { fg = palette.cyan; };
+        chord = { fg = variant.cyan; };
         action = { fg = variant.foreground; };
         hovered = onPink // { bold = true; };
       };
 
       filetype.rules = [
         { mime = "**/image/*"; fg = variant.yellow; }
-        { mime = "**/{audio,video}/*"; fg = palette.purple; }
-        { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}"; fg = palette.pink; }
-        { mime = "**/application/{pdf,doc,rtf}"; fg = palette.cyan; }
+        { mime = "**/{audio,video}/*"; fg = variant.purple; }
+        { mime = "**/application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}"; fg = variant.pink; }
+        { mime = "**/application/{pdf,doc,rtf}"; fg = variant.cyan; }
         { mime = "vfs/{absent,stale}"; fg = variant.border; }
-        { url = "*"; is = "orphan"; bg = palette.pinkDeep; }
+        { url = "*"; is = "orphan"; fg = palette.white; bg = palette.pinkDeep; }
         { url = "*"; is = "exec"; fg = variant.green; }
-        { url = "*"; is = "dummy"; bg = palette.pinkDeep; }
-        { url = "*/"; is = "dummy"; bg = palette.pinkDeep; }
+        { url = "*"; is = "dummy"; fg = palette.white; bg = palette.pinkDeep; }
+        { url = "*/"; is = "dummy"; fg = palette.white; bg = palette.pinkDeep; }
         { url = "*/"; fg = variant.blue; }
       ];
     };
@@ -171,8 +189,8 @@ in
     };
 
     flavors = {
-      tinacious-dark = mkFlavorDir "tinacious-dark" palette.dark;
-      tinacious-light = mkFlavorDir "tinacious-light" palette.light;
+      tinacious-dark = mkFlavorDir "tinacious-dark" darkText;
+      tinacious-light = mkFlavorDir "tinacious-light" lightText;
     };
   };
 }

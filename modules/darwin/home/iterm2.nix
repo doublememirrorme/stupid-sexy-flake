@@ -48,6 +48,10 @@ let
     "Normal Font" = "FiraCodeNFM-Reg 15";
     "Use Non-ASCII Font" = false;
     "ASCII Ligatures" = true;
+    # iTerm2 draws powerline shapes itself, sized to the cell. The font's own
+    # glyphs ignore the 1.31 line spacing, so yazi's rounded caps stuck out
+    # above and below its bars.
+    "Draw Powerline Glyphs" = true;
 
     "Use Separate Colors for Light and Dark Mode" = true;
     "Use Tab Color" = true;

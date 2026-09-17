@@ -23,7 +23,8 @@ let
         "Badge Color" = palette.pinkDeep;
         "Cursor Guide Color" = variant.selection;
 
-        # The tab bar is iTerm's closest match to the VS Code status bar.
+        # Tab colour. In the Minimal theme it also paints the title bar when
+        # the tab bar is hidden, so it matches the tmux and VS Code status bars.
         "Tab Color" = palette.pink;
       };
       ansi = lib.listToAttrs (
@@ -54,7 +55,11 @@ let
     "Draw Powerline Glyphs" = true;
 
     "Use Separate Colors for Light and Dark Mode" = true;
-    "Use Tab Color" = true;
+    # With separate light/dark colours on, iTerm2 reads the suffixed keys and
+    # only falls back to "Use Tab Color" when they are missing. The parent
+    # "Default" profile sets both to false, so they must be set here.
+    "Use Tab Color (Light)" = true;
+    "Use Tab Color (Dark)" = true;
     "Use Cursor Guide" = false;
   }
   // colourSet palette.light "(Light)"

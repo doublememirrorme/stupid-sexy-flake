@@ -27,11 +27,6 @@
       "embyserver"
       "feishin"
       "steam"
-      # Ships its own updater, so greedy is needed for brew to track its version
-      {
-        name = "claude";
-        greedy = true;
-      }
     ];
     masApps = {
       "AdGuard for Safari" = 1440147259;

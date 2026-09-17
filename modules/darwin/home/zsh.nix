@@ -47,6 +47,7 @@
       enable = true;
       package = pkgs.oh-my-zsh;
       theme = "";
+      # No "yarn": it aliases y, ya and yy, which are the yazi wrapper and CLI.
       plugins = [
         "git"
         "brew"
@@ -55,7 +56,6 @@
         "npm"
         "rand-quote"
         "sudo"
-        "yarn"
         "z"
         "colored-man-pages"
         "colorize"

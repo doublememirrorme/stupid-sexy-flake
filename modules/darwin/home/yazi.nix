@@ -171,9 +171,9 @@ in
   programs.yazi = {
     enable = true;
 
-    # `yy` opens yazi and cds into the directory you quit from. Not `y`, because
-    # the oh-my-zsh yarn plugin (zsh.nix) already aliases y and ya to yarn.
-    shellWrapperName = "yy";
+    # `y` opens yazi and cds into the directory you quit from. The oh-my-zsh
+    # yarn plugin is off in zsh.nix, since it aliased y, ya and yy to yarn.
+    shellWrapperName = "y";
 
     # The nixpkgs wrapper already puts fd, ripgrep, fzf, zoxide, 7zz, ffmpeg,
     # poppler, imagemagick, chafa and resvg on yazi's PATH.

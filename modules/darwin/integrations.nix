@@ -30,6 +30,7 @@
       ./home/htop.nix
       ./home/mise.nix
       ./home/claude.nix
+      ./home/yazi.nix
     ];
 
     home.stateVersion = "25.05";

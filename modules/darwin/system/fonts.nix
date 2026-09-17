@@ -6,6 +6,9 @@ in
   fonts.packages = with pkgs; [
     dejavu_fonts
     noto-fonts
+    # FiraCode patched with Nerd Font glyphs; the Mono variant keeps every
+    # icon inside one cell. iTerm2 picks it up from /Library/Fonts/Nix Fonts.
+    nerd-fonts.fira-code
   ];
 
   # GTK apps (e.g. nicotine-plus) use Pango/fontconfig, which macOS does not

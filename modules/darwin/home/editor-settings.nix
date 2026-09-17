@@ -88,5 +88,14 @@ in
     "workbench.colorTheme" = "Tinacious Design";
     "window.systemColorTheme" = "auto";
     "window.autoDetectColorScheme" = true;
+    # Pin the Nix zsh, same as tmux.nix. Otherwise the editor falls back to $SHELL,
+    # and the macOS login shell is still Apple's /bin/zsh.
+    "terminal.integrated.profiles.osx" = {
+      zsh = {
+        path = "${pkgs.zsh}/bin/zsh";
+        args = [ "-l" ];
+      };
+    };
+    "terminal.integrated.defaultProfile.osx" = "zsh";
   };
 }

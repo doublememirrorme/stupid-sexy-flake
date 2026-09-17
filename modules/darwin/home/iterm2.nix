@@ -68,6 +68,14 @@ in
     TabStyleWithAutomaticOption = 5;
     # iTerm2 reads this once at launch, so quit and reopen it after a switch.
     "Default Bookmark Guid" = "tinacious-design";
+
+    # Advanced setting "Use P3 as default color space?", on by default. With it
+    # on, colours apps send (yazi's pink bars) are painted as Display P3, but
+    # iTerm2 tints its own powerline caps inside a plain device RGB bitmap, so
+    # the same pink comes out flatter on the caps and the two do not match.
+    # The profile palette is stored as sRGB and is not affected either way.
+    # Also read once at launch.
+    P3 = false;
   };
 
   home.file."Library/Application Support/iTerm2/DynamicProfiles/tinacious-design.json".text =

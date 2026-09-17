@@ -3,7 +3,7 @@ let
   shared = import ./editor-settings.nix pkgs;
 in
 {
-  # VS Code is the Homebrew cask and auto-updates outside Nix, same as Cursor.
+  # VS Code is the Homebrew cask and auto-updates outside Nix.
   # programs.vscode only writes ~/Library/Application Support/Code/User/settings.json
   # and ~/.vscode/extensions.
   programs.vscode = {
@@ -16,7 +16,6 @@ in
       enableUpdateCheck = false;
       enableExtensionUpdateCheck = false;
 
-      # VS Code-only. Cursor keeps its own extension set.
       extensions = shared.extensions ++ [ pkgs.vscode-extensions.anthropic.claude-code ];
 
       userSettings = shared.userSettings // {

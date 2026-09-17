@@ -1,5 +1,5 @@
-# Shared by cursor.nix (via programs.cursor) and vscode.nix (via programs.vscode).
-# Per-editor overrides live in those two files, not here.
+# Extensions and settings for programs.vscode in vscode.nix. Anything that
+# only VS Code needs is added there, not here.
 pkgs:
 let
   # Neither of these is in nixpkgs, so they come straight from the marketplace.

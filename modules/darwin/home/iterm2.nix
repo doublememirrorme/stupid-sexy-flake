@@ -65,6 +65,12 @@ let
     # by shell prompts). They stay pinned to screen rows while tmux redraws
     # the text under them, so they end up next to unrelated lines.
     "Show Mark Indicators" = false;
+
+    # 2 is "Esc+", so Option+key arrives as a real M- keypress. Left at the
+    # default 0 ("Normal") Option+1 types the character it prints on, and
+    # tmux never sees its M-1 layout bindings. Right Option keeps the
+    # default so it still types accented characters.
+    "Option Key Sends" = 2;
   }
   // colourSet palette.light "(Light)"
   // colourSet palette.dark "(Dark)";

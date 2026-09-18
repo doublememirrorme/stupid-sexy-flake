@@ -14,6 +14,15 @@ let
       variant=light
     fi
 
+    # Leave the answer on disk for anything that cannot ask the terminal
+    # again. Vim queries OSC 11 once at startup and never re-queries, so a
+    # running vim reads this file on FocusGained to notice a flip. Written
+    # before the tmux check below, since vim wants it whether tmux is up or
+    # not. The directory is created first, XDG_STATE_HOME may not exist yet
+    # on a fresh boot.
+    mkdir -p "${config.xdg.stateHome}"
+    printf '%s\n' "$variant" > "${config.xdg.stateHome}/appearance"
+
     # No server running means nothing to restyle, and that is not an error.
     ${tmuxBin} has-session 2>/dev/null || exit 0
 

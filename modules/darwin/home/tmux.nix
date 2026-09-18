@@ -64,6 +64,15 @@ in
 
       # Manual re-sync, for when you want it without waiting on the agent.
       bind-key T run-shell tmux-theme
+
+      # tmux binds ctrl+click to swap-pane by default, so a ctrl+click inside
+      # vim swapped two panes instead of reaching vim. This forwards it the
+      # way a plain click is forwarded: focus the pane under the pointer,
+      # then pass the event on. What arrives in vim is <C-LeftMouse>, which
+      # is what the LSP go-to-definition mapping in vim.nix hangs off.
+      # The cost: ctrl+click no longer swaps panes. Use prefix+Space or
+      # prefix+{ and prefix+} to rearrange them instead.
+      bind-key -n C-MouseDown1Pane select-pane -t = \; send-keys -M
     '';
   };
 }

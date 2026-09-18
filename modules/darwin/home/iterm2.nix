@@ -89,6 +89,15 @@ in
     # iTerm2 reads this once at launch, so quit and reopen it after a switch.
     "Default Bookmark Guid" = "tinacious-design";
 
+    # Advanced setting "Pass ctrl-click to the terminal?", off by default.
+    # Off, a ctrl-only left click opens iTerm2's own context menu and the
+    # click never leaves the app, so tmux and vim see nothing. On, it is
+    # reported as a normal mouse event with the ctrl modifier, which is what
+    # vim's <C-LeftMouse> needs. Right clicks still do not get through,
+    # ReportRightClick is a separate setting and stays off.
+    # Global for all profiles, and read once at launch, so relaunch iTerm2.
+    PassOnControlClick = true;
+
     # Advanced setting "Use P3 as default color space?", on by default. With it
     # on, colours apps send (yazi's pink bars) are painted as Display P3, but
     # iTerm2 tints its own powerline caps inside a plain device RGB bitmap, so

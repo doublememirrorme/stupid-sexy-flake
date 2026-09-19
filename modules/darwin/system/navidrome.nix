@@ -48,6 +48,8 @@ in
       KeepAlive = true;
       RunAtLoad = true;
       WorkingDirectory = dataDir;
+      StandardOutPath = "${dataDir}/navidrome.log";
+      StandardErrorPath = "${dataDir}/navidrome.err.log";
     };
   };
 
